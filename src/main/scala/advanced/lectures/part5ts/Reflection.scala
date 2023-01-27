@@ -17,7 +17,9 @@ object Reflection extends App {
   val m = ru.runtimeMirror(getClass.getClassLoader)
   // 2 - create a class object = "description"
   val clazz =
-    m.staticClass("advanced.lectures.part5ts.Reflection.Person") // creating a class object by NAME
+    m.staticClass(
+      "advanced.lectures.part5ts.Reflection.Person"
+    ) // creating a class object by NAME
   // 3 - create a reflected mirror = "can DO things"
   val cm = m.reflectClass(clazz)
   // 4 - get the constructor
