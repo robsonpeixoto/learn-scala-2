@@ -4,4 +4,7 @@ Global / scalaVersion := "2.12.17"
 Global / scalacOptions ++= Seq("-language:postfixOps")
 lazy val root = project
   .in(file("."))
-  .settings(name := "Learn Scala 2")
+  .settings(
+    name := "Learn Scala 2",
+    libraryDependencies += "org.scala-lang" % "scala-reflect" % "2.12.17"
+  )
