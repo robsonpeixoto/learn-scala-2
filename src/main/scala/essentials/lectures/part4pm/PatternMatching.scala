@@ -18,7 +18,7 @@ object PatternMatching extends App {
   }
 
   println(x)
-  println(description)
+  println(s"x: $x => description: $description")
 
   // 1. Decompose values
   case class Person(name: String, age: Int)
@@ -45,6 +45,7 @@ object PatternMatching extends App {
   case class Parrot(greeting: String) extends Animal
 
   val animal: Animal = Dog("Terra Nova")
+  // val animal: Animal = Parrot("say hi") // throw `scala.MatchError: Parrot(say hi) `
   animal match {
     case Dog(someBreed) => println(s"Matched a dog of the $someBreed breed")
   }
@@ -57,6 +58,14 @@ object PatternMatching extends App {
   // WHY?!
   val isEvenCond = if (x % 2 == 0) true else false // ?!
   val isEvenNormal = x % 2 == 0
+
+
+  val isEvenF: Int => Boolean = {
+    case n if n % 2 == 0 => true
+    case _               => false
+  }
+  println(s"isEven(10): ${isEvenF(10)}")
+  println(s"isEven(11): ${isEvenF(11)}")
 
   /*
     Exercise
