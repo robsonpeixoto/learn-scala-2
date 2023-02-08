@@ -59,7 +59,6 @@ object PatternMatching extends App {
   val isEvenCond = if (x % 2 == 0) true else false // ?!
   val isEvenNormal = x % 2 == 0
 
-
   val isEvenF: Int => Boolean = {
     case n if n % 2 == 0 => true
     case _               => false
@@ -77,7 +76,7 @@ object PatternMatching extends App {
      Prod(Sum(Number(2), Number(1)), Number(3)) = (2 + 1) * 3
      Sum(Prod(Number(2), Number(1)), Number(3)) = 2 * 1 + 3
    */
-  trait Expr
+  sealed trait Expr
   case class Number(n: Int) extends Expr
   case class Sum(e1: Expr, e2: Expr) extends Expr
   case class Prod(e1: Expr, e2: Expr) extends Expr
