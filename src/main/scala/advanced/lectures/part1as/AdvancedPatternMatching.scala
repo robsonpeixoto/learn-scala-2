@@ -18,7 +18,9 @@ object AdvancedPatternMatching extends App {
     - some special magic like above
    */
 
-  class Person(val name: String, val age: Int)
+  class Person(val name: String, val age: Int) {
+    override def toString(): String = s"Person($name, $age)"
+  }
 
   object Person {
     def unapply(person: Person): Option[(String, Int)] =
@@ -29,12 +31,16 @@ object AdvancedPatternMatching extends App {
       Some(if (age < 21) "minor" else "major")
   }
 
-  val bob = new Person("Bob", 25)
-  val greeting = bob match {
+  val greeting: Person => String = {
     case Person(n, a) => s"Hi, my name is $n and I am $a yo."
+    case person       => s"Cannot extract name and age from $person"
   }
 
-  println(greeting)
+  val bob = new Person("Bob", 25)
+  println(s"Old BOB => ${greeting(bob)}")
+
+  val yongBob = new Person("Bob", 20)
+  println(s"Yong BOB => ${greeting(yongBob)}")
 
   val legalStatus = bob.age match {
     case Person(status) => s"My legal status is $status"
