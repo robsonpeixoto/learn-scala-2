@@ -50,7 +50,7 @@ object AllThePatterns extends App {
   // 5 - list patterns
   val aStandardList = List(1, 2, 3, 42)
   val standardListMatching = aStandardList match {
-    case List(1, _, _, _)    => // extractor - advanced
+    case List(1, _, _, _)    => // extractor - advanced - List with 4 elements
     case List(1, _*)         => // list of arbitrary length - advanced
     case 1 :: List(_)        => // infix pattern
     case List(1, 2, 3) :+ 42 => // infix pattern
@@ -65,13 +65,14 @@ object AllThePatterns extends App {
 
   // 7 - name binding
   val nameBindingMatch = aList match {
-    case nonEmptyList @ Cons(_, _)  => // name binding => use the name later(here)
-    case Cons(1, rest @ Cons(2, _)) => // name binding inside nested patterns
+    case Cons(1, rest @ Cons(2, _)) => rest // name binding inside nested patterns
+    case nonEmptyList @ Cons(_, _)  => nonEmptyList // name binding => use the name later(here)
   }
 
   // 8 - multi-patterns
   val multipattern = aList match {
     case Empty | Cons(0, _) => // compound pattern (multi-pattern)
+    case Cons(1, Cons(2, _))=> // OBS: just to not throw `scala.MatchError: [1 2]`
   }
 
   // 9 - if guards
@@ -87,12 +88,13 @@ object AllThePatterns extends App {
 
   val numbers = List(1, 2, 3)
   val numbersMatch = numbers match {
+    // NOTE: because of the `type erasure` it will always match the first case because the `String/Int` will be ignored
     case listOfStrings: List[String] => "a list of strings"
     case listOfNumbers: List[Int]    => "a list of numbers"
     case _                           => ""
   }
 
-  println(numbersMatch)
+  println(s"numbersMatch => $numbersMatch")
   // JVM trick question
 
 }
