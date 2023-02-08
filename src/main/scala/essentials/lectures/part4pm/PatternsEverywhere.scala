@@ -5,26 +5,18 @@ package essentials.lectures.part4pm
 object PatternsEverywhere extends App {
 
   // big idea #1
-  try {
-    // code
-  } catch {
-    case e: RuntimeException       => "runtime"
-    case npe: NullPointerException => "npe"
-    case _                         => "something else"
-  }
-
   // catches are actually MATCHES
-  /*
+  val error =
     try {
       // code
-    } catch (e) {
-      e match {
-        case e: RuntimeException => "runtime"
-        case npe: NullPointerException => "npe"
-        case _ => "something else"
-      }
+      1 / 0
+    } catch {
+      case e: RuntimeException       => "runtime"
+      case npe: NullPointerException => "npe"
+      case _: Throwable              => "something else"
     }
-   */
+
+  println(s"error => $error")
 
   // big idea #2
   val list = List(1, 2, 3, 4)
@@ -42,13 +34,18 @@ object PatternsEverywhere extends App {
   // big idea #3
   val tuple = (1, 2, 3)
   val (a, b, c) = tuple
-  println(b)
+  println(s"tuple => $a + $b + $c")
   // multiple value definitions based on PATTERN MATCHING
   // ALL THE POWER
 
+  case class Hi(name: String)
+  val say = Hi(name = "Bob")
+  val Hi(name) = say
+  println(s"the name is $name")
+
   val head :: tail = list
-  println(head)
-  println(tail)
+  println(s"head: $head")
+  println(s"tail: $tail")
 
   // big idea #4 - NEW
   // partial function based on PATTERN MATCHING
