@@ -52,12 +52,12 @@ object AdvancedPatternMatching extends App {
     Exercise.
    */
 
-  object even {
-    def unapply(arg: Int): Boolean = arg % 2 == 0
-  }
-
   object singleDigit {
     def unapply(arg: Int): Boolean = arg > -10 && arg < 10
+  }
+
+  object even {
+    def unapply(arg: Int): Boolean = arg % 2 == 0
   }
 
   val n: Int = 8
