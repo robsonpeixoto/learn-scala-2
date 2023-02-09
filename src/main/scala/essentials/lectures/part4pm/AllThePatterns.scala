@@ -71,8 +71,8 @@ object AllThePatterns extends App {
 
   // 8 - multi-patterns
   val multipattern = aList match {
-    case Empty | Cons(0, _) => // compound pattern (multi-pattern)
-    case Cons(1, Cons(2, _))=> // OBS: just to not throw `scala.MatchError: [1 2]`
+    case Empty | Cons(0, _)  => // compound pattern (multi-pattern)
+    case Cons(1, Cons(2, _)) => // OBS: just to not throw `scala.MatchError: [1 2]`
   }
 
   // 9 - if guards
